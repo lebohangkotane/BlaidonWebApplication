@@ -1,0 +1,395 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{184F3FEC-C3A9-4023-848D-FD98C43760BB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlaidonWebApplication</RootNamespace>
+    <AssemblyName>BlaidonWebApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44384</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Konscious.Security.Cryptography.Argon2, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Konscious.Security.Cryptography.Argon2.1.2.1\lib\net46\Konscious.Security.Cryptography.Argon2.dll</HintPath>
+    </Reference>
+    <Reference Include="Konscious.Security.Cryptography.Blake2, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Konscious.Security.Cryptography.Blake2.1.0.9\lib\net46\Konscious.Security.Cryptography.Blake2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha.Web, Version=3.1.0.0, Culture=neutral, PublicKeyToken=c11b6c0ad947566e, processorArchitecture=MSIL">
+      <HintPath>packages\RecaptchaNet.3.1.0\lib\net45\Recaptcha.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.24.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>packages\SendGrid.9.24.1\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>packages\starkbank-ecdsa.1.3.1\lib\net452\StarkbankEcdsa.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\ourTemplate\AdminTemplate\assets\demo\chart-area-demo.js" />
+    <Content Include="Content\ourTemplate\AdminTemplate\assets\demo\chart-bar-demo.js" />
+    <Content Include="Content\ourTemplate\AdminTemplate\assets\demo\chart-pie-demo.js" />
+    <Content Include="Content\ourTemplate\AdminTemplate\assets\demo\datatables-demo.js" />
+    <Content Include="Content\ourTemplate\AdminTemplate\assets\img\error-404-monochrome.svg" />
+    <Content Include="Content\ourTemplate\AdminTemplate\css\styles.css" />
+    <Content Include="Content\ourTemplate\AdminTemplate\js\datatables-simple-demo.js" />
+    <Content Include="Content\ourTemplate\AdminTemplate\js\scripts.js" />
+    <Content Include="Content\ourTemplate\color\blue.css" />
+    <Content Include="Content\ourTemplate\color\cocoa.css" />
+    <Content Include="Content\ourTemplate\color\default.css" />
+    <Content Include="Content\ourTemplate\color\green.css" />
+    <Content Include="Content\ourTemplate\color\jeans.css" />
+    <Content Include="Content\ourTemplate\color\red.css" />
+    <Content Include="Content\ourTemplate\color\retro.css" />
+    <Content Include="Content\ourTemplate\color\romantic.css" />
+    <Content Include="Content\ourTemplate\color\stamp.css" />
+    <Content Include="Content\ourTemplate\color\yellow.css" />
+    <Content Include="Content\ourTemplate\contactform\contactform.js" />
+    <Content Include="Content\ourTemplate\contactform\Readme.txt" />
+    <Content Include="Content\ourTemplate\css\animate.css" />
+    <Content Include="Content\ourTemplate\css\bootstrap-responsive.css" />
+    <Content Include="Content\ourTemplate\css\bootstrap.css" />
+    <Content Include="Content\ourTemplate\css\custom-fonts.css" />
+    <Content Include="Content\ourTemplate\css\font-awesome-ie7.css" />
+    <Content Include="Content\ourTemplate\css\font-awesome.css" />
+    <Content Include="Content\ourTemplate\css\overwrite.css" />
+    <Content Include="Content\ourTemplate\css\prettyPhoto.css" />
+    <Content Include="Content\ourTemplate\css\shortcodes.css" />
+    <Content Include="Content\ourTemplate\css\style.css" />
+    <Content Include="Content\ourTemplate\fonts\customicon\Icons.svg" />
+    <Content Include="Content\ourTemplate\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\ourTemplate\ico\apple-touch-icon-114-precomposed.png" />
+    <Content Include="Content\ourTemplate\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="Content\ourTemplate\ico\apple-touch-icon-57-precomposed.png" />
+    <Content Include="Content\ourTemplate\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Content\ourTemplate\ico\favicon.png" />
+    <Content Include="Content\ourTemplate\img\avatar.png" />
+    <Content Include="Content\ourTemplate\img\bg_direction_nav.png" />
+    <Content Include="Content\ourTemplate\img\brett-jordan-lI5yDEp656s-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\building1.jpg" />
+    <Content Include="Content\ourTemplate\img\bunkFiling1.jpg" />
+    <Content Include="Content\ourTemplate\img\charles-deluvio-u4vk-EnqVwg-unsplash %281%29.jpg" />
+    <Content Include="Content\ourTemplate\img\charles-deluvio-u4vk-EnqVwg-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\corporateBrand.jpg" />
+    <Content Include="Content\ourTemplate\img\csclothing.jpg" />
+    <Content Include="Content\ourTemplate\img\customFurniture1.jpg" />
+    <Content Include="Content\ourTemplate\img\ddp-hpLQb1pqPtE-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\dry_walling1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\65x65\thumb1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\65x65\thumb2.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\65x65\thumb3.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\img1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\img2.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\img3.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\img1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\img2.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\img3.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\img4.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\no-thumb.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\quote-thumb.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\blog\thumbs\small1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\dummy-1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\team1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\team2.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\team3.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\team4.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\testimonial-author1.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\1.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\1.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\2.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\2.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\3.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\3.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\4.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\4.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\5.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\5.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\6.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\6.png" />
+    <Content Include="Content\ourTemplate\img\dummies\works\7.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\8.jpg" />
+    <Content Include="Content\ourTemplate\img\dummies\works\big.png" />
+    <Content Include="Content\ourTemplate\img\electrical1.jpg" />
+    <Content Include="Content\ourTemplate\img\flooring1.jpg" />
+    <Content Include="Content\ourTemplate\img\gleisson-joaquim-MTMsK4cEF3M-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\ourTemplate\img\glyphicons-halflings.png" />
+    <Content Include="Content\ourTemplate\img\greyson-joralemon-A1g0oeX29ec-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\header-pattern-150.png" />
+    <Content Include="Content\ourTemplate\img\intro-background.jpg" />
+    <Content Include="Content\ourTemplate\img\largeFormatPrinting1.jpg" />
+    <Content Include="Content\ourTemplate\img\michal-matlon-n2ZufifTbSo-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\nick-fewings-C2zhShTnl5I-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\officeFurniture1.jpg" />
+    <Content Include="Content\ourTemplate\img\painting1.jpg" />
+    <Content Include="Content\ourTemplate\img\pattern\pat-1.png" />
+    <Content Include="Content\ourTemplate\img\plumbing1.jpg" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\sprite.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\ourTemplate\img\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\ourTemplate\img\promoItem.jpg" />
+    <Content Include="Content\ourTemplate\img\renovation1.jpg" />
+    <Content Include="Content\ourTemplate\img\ruslan-bardash-4kTbAMRAHtQ-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\signage1.jpg" />
+    <Content Include="Content\ourTemplate\img\spencer-davis-QTKwYmMumfk-unsplash.jpg" />
+    <Content Include="Content\ourTemplate\img\top-pattern-150.png" />
+    <Content Include="Content\ourTemplate\img\viweme.jpg" />
+    <Content Include="Content\ourTemplate\img\WhatsApp Video 2021-03-27 at 15.03.21.mp4" />
+    <Content Include="Content\ourTemplate\js\animate.js" />
+    <Content Include="Content\ourTemplate\js\bootstrap.js" />
+    <Content Include="Content\ourTemplate\js\bootstrap.min.js" />
+    <Content Include="Content\ourTemplate\js\custom.js" />
+    <Content Include="Content\ourTemplate\js\google-code-prettify\prettify.css" />
+    <Content Include="Content\ourTemplate\js\google-code-prettify\prettify.js" />
+    <Content Include="Content\ourTemplate\js\jquery-transit-modified.js" />
+    <Content Include="Content\ourTemplate\js\jquery.easing.1.3.js" />
+    <Content Include="Content\ourTemplate\js\jquery.js" />
+    <Content Include="Content\ourTemplate\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\ourTemplate\js\modernizr.custom.js" />
+    <Content Include="Content\ourTemplate\js\portfolio\jquery.quicksand.js" />
+    <Content Include="Content\ourTemplate\js\portfolio\setting.js" />
+    <Content Include="Content\ourTemplate\js\toucheffects.js" />
+    <Content Include="Global.asax" />
+    <Content Include="RecaptchaNet.Readme.txt" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\ResetPController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\TCPPController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AdminClss.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\DataPoint.cs" />
+    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\Encryption.cs" />
+    <Compile Include="Models\Enquiry.cs" />
+    <Compile Include="Models\ProductPackage.cs" />
+    <Compile Include="Models\Registration.cs" />
+    <Compile Include="Models\Reset.cs" />
+    <Compile Include="Models\ServicePackage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Content\ourTemplate\fonts\customicon\Icons.eot" />
+    <Content Include="Content\ourTemplate\fonts\customicon\Icons.ttf" />
+    <Content Include="Content\ourTemplate\fonts\customicon\Icons.woff" />
+    <Content Include="Content\ourTemplate\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\ourTemplate\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\ourTemplate\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\ourTemplate\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\ourTemplate\fonts\FontAwesome.otf" />
+    <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Registration\Register.cshtml" />
+    <Content Include="Views\Services\Services.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Account\Users.cshtml" />
+    <Content Include="Views\Admin\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\EditAdmins.cshtml" />
+    <Content Include="Views\Admin\EditUsers.cshtml" />
+    <Content Include="Views\Admin\EnquiryRequest.cshtml" />
+    <Content Include="Views\Admin\ServiceRequest.cshtml" />
+    <Content Include="Views\Registration\OTP.cshtml" />
+    <Content Include="Views\TCPP\TC.cshtml" />
+    <Content Include="Views\TCPP\PP.cshtml" />
+    <Content Include="Views\ResetP\ForgotPassword.cshtml" />
+    <Content Include="Views\ResetP\ResetPassword.cshtml" />
+    <Content Include="Views\ResetP\OTP.cshtml" />
+    <None Include="Properties\PublishProfiles\Blaidonwebsite - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Account\DeleteAcc.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54651</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44384/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

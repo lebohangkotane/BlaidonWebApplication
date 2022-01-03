@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "EditAdmins";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+<script src="jquery.min.js"></script>
+<style>
+    /* The message box is shown when the user clicks on the password field */
+    #passwordStrengthMessage {
+        display: none;
+        background: #f1f1f1;
+        color: #000;
+    }
+
+    /* Add a green text color when the requirements are right */
+    .valid {
+        color: green;
+    }
+
+    /* Add a red text color when the requirements are wrong */
+    .invalid {
+        color: red;
+    }
+</style>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <p style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 0px; border-color: black; border-style:solid;"></p>
+            <h1 class="mt-4">Edit Admins</h1>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Records of All Registered Admins.
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+
+                        <thead>
+                            <tr>
+                                <th>Admin_ID</th>
+                                <th>FName</th>
+                                <th>LName</th>
+                                <th>Phone_No</th>
+                                <th>Email_add</th>
+                                <th>Job_Role</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Admin_ID</th>
+                                <th>FName</th>
+                                <th>LName</th>
+                                <th>Phone_No</th>
+                                <th>Email_add</th>
+                                <th>Job_Role</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var Data in Model)
+                                    {
+                                        <tr>
+                                            <td>@Data.Admin_ID</td>
+                                            <td>@Data.FName</td>
+                                            <td>@Data.LName</td>
+                                            <td>@Data.Phone_No</td>
+                                            <td>@Data.Email</td>
+                                            <td>@Data.Job_Role</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr style="height: 4px; background-color: #0d6efd ">
+            <table width="90%">
+                <tr style="vertical-align:top">
+                    <td style="width:40%">
+                        <div>
+                            <form action="AddAdmin" method="post">
+                                <h3 class="text-center">Create New Employee</h3>
+                                <div class="form-group">
+                                    <label for="FName">Name</label>
+                                    <input type="text" name="FName" id="name" placeholder="Enter Full Name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="LName">Surname</label>
+                                    <input type="text" name="LName" id="LName" placeholder="Enter Surname" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Phone_No">Phone Number</label>
+                                    <input type="tel" name="Phone_No" id="Phone_No" placeholder="Enter Valid Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email_add">Email Address</label>
+                                    <input type="text" name="Email" id="Email_add" placeholder="Email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Job_Role">Job</label>
+                                    <input type="text" name="Job_Role" id="Job_Role" placeholder="Job Role" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <p>
+                                        <label for="password">Password </label>
+                                        <input type="password" name="Password_" id="Password_" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain: At least one Number and one Uppercase letter and Lowercase letter and one Special Symbol, and at least 8 or more characters" class="form-control" required><br>
+                                        <div id="passwordStrengthMessage">
+                                            <h7>Password must contain the following:</h7>
+                                            <p id="characterLength" class="invalid">Minimum 8 Characters</p>
+                                            <p id="capitalLetter" class="invalid">An Uppercase Letter</p>
+                                            <p id="lowerLetter" class="invalid">A Lowercase Letter</p>
+                                            <p id="number" class="invalid">A Number</p>
+                                            <p id="specialSymbol" class="invalid">A Special Symbol</p>
+                                        </div>
+
+                                    <p>
+                                        <label for="confirmpsw">Confirm Password </label>
+                                        <input type="password" name="confirm_password" id='confirm_password' onkeyup='checkPasswordMatch()' class="form-control" required>
+                                        <span id='checkPasswordMessage'></span>
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-info" type="submit" id="submitBtn">Add</button>
+                                </div>
+
+                                <script>
+                                    //Make sure the 2 Password fields match
+                                    var checkPasswordMatch = function () {
+                                        if (document.getElementById('Password_').value == document.getElementById('confirm_password').value) {
+                                            document.getElementById('checkPasswordMessage').style.color = 'green';
+                                            document.getElementById('checkPasswordMessage').innerHTML = 'Passwords Match';
+                                            document.getElementById('submitBtn').style.display = 'initial';
+
+                                        } else {
+                                            document.getElementById('checkPasswordMessage').style.color = 'red';
+                                            document.getElementById('checkPasswordMessage').innerHTML = 'Passwords Do Not Match!';
+                                            document.getElementById('submitBtn').style.display = 'none';
+
+                                        }
+                                    }
+
+                                    //How to ensure compliance of Password strength
+                                    var password = document.getElementById('Password_');
+                                    var characterLength = document.getElementById('characterLength');
+                                    var capitalLetter = document.getElementById('capitalLetter');
+                                    var lowerLetter = document.getElementById('lowerLetter');
+                                    var number = document.getElementById('number');
+                                    var specialSymbol = document.getElementById('specialSymbol');
+
+                                    // When the user clicks on the password field, show the message box
+                                    password.onfocus = function () {
+                                        document.getElementById("passwordStrengthMessage").style.display = "block";
+                                    }
+
+                                    // When the user clicks outside of the password field, hide the message box
+                                    password.onblur = function () {
+                                        document.getElementById("passwordStrengthMessage").style.display = "none";
+                                    }
+
+                                    // When the user starts to type something inside the password field
+                                    password.onkeyup = function () {
+                                        // Validate length
+                                        if (password.value.length >= 8) {
+                                            characterLength.classList.remove("invalid");
+                                            characterLength.classList.add("valid");
+                                        } else {
+                                            characterLength.classList.remove("valid");
+                                            characterLength.classList.add("invalid");
+                                        }
+
+                                        // Validate capital letters
+                                        var upperCaseLetters = /[A-Z]/g;
+                                        if (password.value.match(upperCaseLetters)) {
+                                            capitalLetter.classList.remove("invalid");
+                                            capitalLetter.classList.add("valid");
+                                        } else {
+                                            capitalLetter.classList.remove("valid");
+                                            capitalLetter.classList.add("invalid");
+                                        }
+
+                                        // Validate lowercase letters
+                                        var lowerCaseLetters = /[a-z]/g;
+                                        if (password.value.match(lowerCaseLetters)) {
+                                            lowerLetter.classList.remove("invalid");
+                                            lowerLetter.classList.add("valid");
+                                        } else {
+                                            lowerLetter.classList.remove("valid");
+                                            lowerLetter.classList.add("invalid");
+                                        }
+
+                                        // Validate numbers
+                                        var numerals = /[0-9]/g;
+                                        if (password.value.match(numerals)) {
+                                            number.classList.remove("invalid");
+                                            number.classList.add("valid");
+                                        } else {
+                                            number.classList.remove("valid");
+                                            number.classList.add("invalid");
+                                        }
+
+                                        //Validate Specia Symbols
+                                        var specialCharacters = /[!@@.,#$%^&*]/g;
+                                        if (password.value.match(specialCharacters)) {
+                                            specialSymbol.classList.remove("invalid");
+                                            specialSymbol.classList.add("valid");
+                                        } else {
+                                            specialSymbol.classList.remove("valid");
+                                            specialSymbol.classList.add("invalid");
+                                        }
+                                    }
+
+                                    // Restricts input for the given textbox to the given inputFilter.
+                                    function setInputFilter(textbox, inputFilter) {
+                                        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+                                            textbox.addEventListener(event, function () {
+                                                if (inputFilter(this.value)) {
+                                                    this.oldValue = this.value;
+                                                    this.oldSelectionStart = this.selectionStart;
+                                                    this.oldSelectionEnd = this.selectionEnd;
+                                                } else if (this.hasOwnProperty("oldValue")) {
+                                                    this.value = this.oldValue;
+                                                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                                                } else {
+                                                    this.value = "";
+                                                }
+                                            });
+                                        });
+                                    }
+                                    // Install input filters.
+                                    setInputFilter(document.getElementById("Phone_No"), function (value) {
+                                        return /^\d*$/.test(value);
+                                    });
+
+                                    // Install input filters Admin ID.
+                                    setInputFilter(document.getElementById("Admin_ID"), function (value) {
+                                        return /^\d*$/.test(value);
+                                    });
+                                </script>
+                            </form>
+                        </div>
+                    </td>
+                    <td style="width: 10%"></td>
+                    <td style="width:40%">
+                        <div>
+                            <form action="DlteAdmin" method="post">
+
+                                <h3 class="text-center">Remove an Employee</h3>
+                                <div class="form-group">
+                                    <label for="Admin_ID">Admin ID</label>
+                                    <input type="tel" name="Admin_ID" id="Admin_ID" placeholder="Admin_ID" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Password_">Password</label>
+                                    <input type="password" name="Password_" id="Password_" placeholder="Password" class="form-control" required>
+                                </div>
+                                <br />
+                                <style>
+                                    .Delbutton {
+                                        background-color: #f44336;
+                                        border-radius: 4px;
+                                        padding: 5px 20px;
+                                    }
+                                </style>
+                                <div class="form-group">
+                                    <button class="Delbutton" id="Delete" type="submit">Delete</button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <script>
+                // Restricts input for the given textbox to the given inputFilter.
+                function setInputFilter(textbox, inputFilter) {
+                    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+                        textbox.addEventListener(event, function () {
+                            if (inputFilter(this.value)) {
+                                this.oldValue = this.value;
+                                this.oldSelectionStart = this.selectionStart;
+                                this.oldSelectionEnd = this.selectionEnd;
+                            } else if (this.hasOwnProperty("oldValue")) {
+                                this.value = this.oldValue;
+                                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                            } else {
+                                this.value = "";
+                            }
+                        });
+                    });
+                }
+
+                // Install input filters Admin ID.
+                setInputFilter(document.getElementById("Admin_ID"), function (value) {
+                    return /^\d*$/.test(value);
+                });
+            </script>
+        </div>
+    </main>
+</div>
+
+

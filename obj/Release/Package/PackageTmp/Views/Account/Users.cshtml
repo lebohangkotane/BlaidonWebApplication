@@ -1,0 +1,305 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Blaidon Project and Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your page description here" />
+    <meta name="author" content="" />
+
+    <!-- css -->
+    <link href="~/Content/ourTemplate/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/ourTemplate/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/ourTemplate/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="~/Content/ourTemplate/css/style.css" rel="stylesheet">
+
+
+    <!-- Theme skin -->
+    <link id="t-colors" href="~/Content/ourTemplate/color/default.css" rel="stylesheet" />
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/ourTemplate/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/ourTemplate/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/ourTemplate/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/ourTemplate/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="shortcut icon" href="~/Content/ourTemplate/ico/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- start header -->
+        <header>
+            <br>
+            <div class="container">
+                <div class="span12">
+                    <div class="row nomargin">
+                        <div class="span6">
+                            <div class="logo">
+                                <h1>@Html.ActionLink("Blaidon Project and Design", "Index", "Home")</h1>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="navbar navbar-static-top">
+                                <div class="navigation">
+                                    <nav>
+                                        <ul class="nav topnav">
+                                            <li class="active">
+                                                @Html.ActionLink("Logout", "Index", "Home")
+                                            </li>
+                                            <li class="active">
+                                                @Html.ActionLink("Delete", "DeleteAcc", "Account")
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- end navigation -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end header -->
+        <!-- section intro -->
+        <section id="intro">
+            <div class="intro-content">
+                <h2>Blaidon Project and Design</h2>
+                <h3><i>Products and Supplies</i></h3>
+            </div>
+        </section>
+
+        <!-- /section intro -->
+        <section>
+            <div class="container">
+                <br>
+                <h3>Welcome @BlaidonWebApplication.Controllers.LoginController.Global.uiAStrg<!--name of user --></h3>
+                <hr style="height:4px; width:1150px; background-color:#8fc04e">
+                <p><b>As a loyal and regular customer, you are able to see all your previous service requests and enquires.</b></p>
+
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div class="container-fluid px-4">
+
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatablesSimple">
+                                        <thead>
+                                            <tr>
+                                                <th>Date Made</th>
+                                                <th>Service Request</th>
+                                                <th>Booking Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Date Made</th>
+                                                <th>Service Request</th>
+                                                <th>Booking Details</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            @{
+                                                if (Model != null)
+                                                {
+                                                    foreach (var Data in Model)
+                                                    {
+                                                        <tr>
+                                                            <td>@Data.date_made</td>
+                                                            <td>@Data.service_request</td>
+                                                            <td>@Data.booking_details</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+
+            </div>
+            <br>
+        </section>
+        <section id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h4>Service Request</h4>
+                        <hr style="height:4px; width:800px; background-color:#8fc04e">
+                        <p><b>Watch this space for specials and discounts directly from the Blaidon team to our loyal customers!</b></p>
+
+                        <form id="contactform" action="Book" method="post" role="form" class="contactForm">
+
+                            <div id="sendmessage">Your message has been sent. Thank you!</div>
+                            <div id="errormessage"></div>
+
+                            <div class="row">
+                                <div class="span4 form-group">
+
+                                    <select name="service_request" id="service-select">
+                                        <option value="">--Please choose an option--</option>
+                                        <option value="Plumbing">Plumbing</option>
+                                        <option value="Painting">Painting</option>
+                                        <option value="Electrical">Electrical</option>
+                                        <option value="Flooring">Flooring</option>
+                                        <option value="Dry walling solutions">Dry Walling Solutions</option>
+                                        <option value="Building">Building</option>
+                                        <option value="Renovations">Renovations</option>
+                                    </select>
+                                    <div class="validation"></div>
+                                </div>
+                                <br>
+                                <div class="span6 margintop10 field form-group">
+                                    <textarea rows="12" name="booking_details" class="input-block-level" placeholder="* Your message here..." data-rule="required" data-msg="Please write something"></textarea>
+                                    <div class="validation"></div>
+
+                                    <p>
+                                        <button class="btn btn-color margintop10 pull-left" type="submit">Send Request</button>
+                                        <span class="pull-right margintop20">* Please fill all required form field, thanks!</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    <div class="widget">
+                        <div class="footer_logo">
+                            <h3>Contact Details</h3>
+                        </div>
+                        <address>
+                            <strong>Blaidon Project and Design</strong><br>
+                            Saxonwold, Johannesburg<br>
+                            2132 P.O Box 521303
+                        </address>
+                        <p>
+                            <i class="icon-phone"></i>067 043 7774 <br>
+                            <i class="icon-envelope-alt"></i> viwemeprojects@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h5 class="widgetheading">Product Offering</h5>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Promotional Items", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Corporate Branding", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Custom Made Furniture", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Corporate and Safety Clothing", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Mobile Bulk Filing Systems", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Office Furniture and Office Accessories", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Large Format Printing", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Signage", "Index", "Home")</li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="span4">
+                    <div class="widget">
+                        <h5 class="widgetheading">Services</h5>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Plumbing", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Painting", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Electrical", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Flooring", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Dry Walling Solutions", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Building", "Services", "Home")</li>
+                            <li>@Html.ActionLink("Renovations", "Services", "Home")</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h4 class="widgetheading"><b>Legal</b></h4>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Terms & Conditions", "TC", "TCPP")</li>
+                            <li>@Html.ActionLink("Privacy Policy", "PP", "TCPP")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        <div class="copyright">
+                            <p><span>&copy; Quad Systems. All right reserved</span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scrollup"><i class="icon-angle-up icon-rounded icon-bglight icon-2x"></i></a>
+
+    <!-- javascript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Content/ourTemplate/js/jquery.js"></script>
+    <script src="~/Content/ourTemplate/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/ourTemplate/js/bootstrap.js"></script>
+    <script src="~/Content/ourTemplate/js/modernizr.custom.js"></script>
+    <script src="~/Content/ourTemplate/js/toucheffects.js"></script>
+    <script src="~/Content/ourTemplate/js/google-code-prettify/prettify.js"></script>
+    <script src="~/Content/ourTemplate/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/ourTemplate/js/portfolio/jquery.quicksand.js"></script>
+    <script src="~/Content/ourTemplate/js/portfolio/setting.js"></script>
+    <script src="~/Content/ourTemplate/js/animate.js"></script>
+
+    <!--CSS And JS for table bookings-->>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/ourTemplate/AdminTemplate/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/Content/ourTemplate/AdminTemplate/assets/demo/chart-area-demo.js"></script>
+    <script src="~/Content/ourTemplate/AdminTemplate/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="~/Content/ourTemplate/AdminTemplate/js/datatables-simple-demo.js"></script>
+
+    <!-- Template Custom JavaScript File -->
+    <script src="~/Content/ourTemplate/js/custom.js"></script>
+
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+    <link href="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js " />
+
+    <!---previous Bookings table CCss & JS-->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="~/Content/ourTemplate/css/styles.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatablesSimple').DataTable();
+        });
+    </script>
+</body>
+
+</html>

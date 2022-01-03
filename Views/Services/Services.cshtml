@@ -1,0 +1,402 @@
+﻿
+@{
+    Layout = null;
+}
+@using Recaptcha.Web.Mvc;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Blaidon Project and Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your page description here" />
+    <meta name="author" content="" />
+
+    <!-- css -->
+    <link href="~/Content/ourTemplate/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/ourTemplate/css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="~/Content/ourTemplate/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="~/Content/ourTemplate/css/style.css" rel="stylesheet">
+
+    <!-- Theme skin -->
+    <link id="t-colors" href="~/Content/ourTemplate/color/default.css" rel="stylesheet" />
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/ourTemplate/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/ourTemplate/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/ourTemplate/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/ourTemplate/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="shortcut icon" href="~/Content/ourTemplate/ico/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- start header -->
+        <header>
+            <br>
+            <div class="container">
+                <div class="span12">
+                    <div class="row nomargin">
+                        <div class="span6">
+                            <div class="logo">
+                                <h1>@Html.ActionLink("Blaidon Projects and Design", "Index", "Home")</h1>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="navbar navbar-static-top">
+                                <div class="navigation">
+                                    <nav>
+                                        <ul class="nav topnav">
+                                            <li class="active">
+                                                @Html.ActionLink("Home", "Index", "Home")
+                                            </li>
+
+                                            <li class="active">
+                                                @Html.ActionLink("Register", "Register", "Registration")
+                                            </li>
+
+                                            <li class="active">
+                                                @Html.ActionLink("Login", "Login", "Login")
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- end navigation -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- end header -->
+    <!-- section intro -->
+    <section id="intro">
+        <div class="intro-content">
+            <h2>Blaidon Project and Design</h2>
+            <h3><i>Products and Supplies</i></h3>
+        </div>
+    </section>
+
+    <!-- /section intro -->
+
+    <section id="content">
+        <div class="container">
+            <h3 style="text-align:center;">Services</h3>
+            <p> In addition to our many product offerings, we also offer the following services which you can also enquire on. These are offered through our network of contractors that have a reliable and lengthy relationship with us</p>
+
+            <div class="row">
+                <div class="span12">
+                    <div class="row">
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/plumbing1.jpg" alt="Image">
+                                    <h4><strong>Plumbing</strong></h4>
+                                    <p align="justify">
+                                        <b>
+                                            We bring you the best quality and value for all your plumbing needs. Our reliable plumbers bring you the peace of mind that comes with knowing that all your plumbing problems are repaired quickly and efficiently. From installing taps and unblocking pipes to fixing blocked drains and burst geysers, we got you!
+                                        </b>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/painting1.jpg" alt="Painting">
+                                    <h4><strong>Painting</strong></h4>
+                                    <p align="justify">
+                                        <b>
+                                            If you are looking for reliable, skilled, and dedicated painters to handle your painting need, no need to look further because we are here for you. Our wide range of painting services offer dependability and efficiency when enhancing your home’s decor.
+                                        </b>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/electrical1.jpg" alt="Electrical">
+                                    <h4><strong>Electrical</</strong></h4>
+                                    <p align="justify">
+                                        If you are faced with electrical emergencies or have electrical needs, we can help you. From fault-finding and house wiring to maintenance and installations, our team of well trained and equipped electricians work hard to keep your electrical systems running and safe.
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/flooring1.jpg" alt="Flooring">
+                                    <h4><strong>Flooring</strong></h4>
+                                    <p align="justify">
+                                        Nothing makes your home or office look stunning, fresh, and better that fresh looking floors! Our team of expert floor installers	will help transform the look of your home or office to a stunning and stylish space, tailored to your unique taste and style. Whether you want complete resurfacing or new flooring, our team can make it happen!
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <div class="row">
+                        <div class="span3">
+                            <div class="box aligncenter">
+
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/dry_walling1.jpg" alt="Dry Walling">
+                                    <h4><strong>Dry Walling</strong></h4>
+                                    <p align="justify">
+                                        Do you want to want to make improvements in your home or office space? We have the skills and technology to create any partition with drywalling to fit your needs. Our team can make the changes necessary to your space without the hassle of having any building plans drawn up.
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/building1.jpg" alt="Building">
+                                    <h4><strong>Building</strong></h4>
+                                    <p align="justify">
+                                        Do want to build to walls, patios, or a house from scratch? Do not worry we got you! We have a team of competent and experience builders that commit themselves to lasting quality and best quality structures.
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="box aligncenter">
+                                <div class="text">
+                                    <img src="~/Content/ourTemplate/img/renovation1.jpg" alt="renovation">
+                                    <h4><strong>Renovation</strong></h4>
+                                    <p align="justify">
+                                        Whether you want to extension your home or renovate your kitchen, you can trust you are in good hands here at Blaidon Project and Design. We have a team of contractors that can renovate your space from start to finish.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="span12">
+                    <div class="cta-box">
+                        <div class="row">
+                            <div class="span8">
+                                <div class="cta-text">
+                                    <h2>The Best Prices and Swift Service</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="span6">
+                    <h4>Get in touch with us by filling contact form below</h4>
+                    <hr style="height:4px; width:800px; background-color:#8fc04e">
+
+                    <form id="contactform" action="ServicesSendEmailAsync" method="post" role="form" class="contactForm">
+                        <p class="span8"> Have any questions about our products or service? Like to know more? Send an enquiry and we'll contact you!</p><br>
+
+                        <hr style="height:4px; width:800px; background-color:#bdd798">
+
+                        <div id="sendmessage">Your message has been sent. Thank you!</div>
+
+                        <div id="errormessage"></div>
+
+                        <div class="row">
+                            <div class="span4 field form-group">
+                                <label for="category">Email Address *</label>
+                                <input type="email" id="cusEmail" name="cusEmail" placeholder="* Enter your email address " data-rule="email" data-msg="Please enter a valid email" required />
+                                <div class="validation"></div>
+                            </div>
+                            <br>
+                            <div class="span4 form-group" align="justify">
+                                <label for="category">Category *</label>
+                                <select data-target="secondList" name="category" class="firstList selectFilter" required>
+                                    <option value="">----------</option>
+                                    <option value="Product Offering" data-ref="one">Product Offering</option>
+                                    <option value="Service Offering" data-ref="two">Service Offering</option>
+                                </select>
+                                <div class="validation"></div>
+                            </div>
+                            <br>
+                            <div class="span4 form-group pull-left">
+                                <label for="type">Type of Offering *</label>
+                                <select data-target="thirdList" name="type" class="secondList selectFilter" required>
+                                    <option value="">----------</option>
+                                    <option data-ref="A" data-belong="one">Promotional Items</option>
+                                    <option data-ref="B" data-belong="one">Corporate Branding</option>
+                                    <option data-ref="C" data-belong="one">Custom Made Furniture</option>
+                                    <option data-ref="D" data-belong="one">Corpoate and Safety Clothing</option>
+                                    <option data-ref="E" data-belong="one">Mobile Bulk Filing Systems</option>
+                                    <option data-ref="F" data-belong="one">Office Furniture and Office Accessories</option>
+                                    <option data-ref="G" data-belong="one">Large Format Printing</option>
+                                    <option data-ref="H" data-belong="two">Plumbing</option>
+                                    <option data-ref="I" data-belong="two">Painting</option>
+                                    <option data-ref="J" data-belong="two">Electrical</option>
+                                    <option data-ref="K" data-belong="two">Flooring</option>
+                                    <option data-ref="L" data-belong="two">Dry Walling</option>
+                                    <option data-ref="M" data-belong="two">Building</option>
+                                    <option data-ref="N" data-belong="two">Renovation</option>
+                                </select>
+                                <div class="validation"></div>
+                            </div>
+                            <br>
+                            <div class="span4 margintop10 field form-group">
+                                <label for="category">Details *</label>
+                                <textarea rows="4" id="message" input type="text" name="message" placeholder="*Enter enquiry description." data-rule="minlen:10" data-msg="Please enter at least 4 chars" required></textarea>
+                                <div class="validation"></div>
+                            </div>
+                            <br>
+                            <div class="span4 form-group pull-left">
+                                @Html.RecaptchaWidget()
+                            </div>
+
+                            <p class="span4">
+                                <input id="submit" type="submit" value="Enquire" class="btn btn-color margintop10 pull-left" />
+                                <span class="pull-right margintop20">*Please fill all required form field, thanks!</span>
+                            </p>
+
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">FEEDBACK</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Message submitted</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    <div class="widget">
+                        <div class="footer_logo">
+                            <h3>Contact Details</h3>
+                        </div>
+                        <address>
+                            <strong>Blaidon Project and Design</strong><br>
+                            Saxonwold, Johannesburg<br>
+                            2132 P.O Box 521303
+                        </address>
+                        <p>
+                            <i class="fa fa-phone"></i> 067 043 7774 <br>
+                            <i class="fa fa-envelope"></i> Blaidonprojects@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h5 class="widgetheading">Product Offering</h5>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Promotional Items", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Corporate Branding", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Custom Made Furniture", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Corporate and Safety Clothing", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Mobile Bulk Filing Systems", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Office Furniture and Office Accessories", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Large Format Printing", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Signage", "Index", "Home")</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h5 class="widgetheading">Services</h5>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Plumbing", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Painting", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Electrical", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Flooring", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Dry Walling Solutions", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Building", "Services", "Services")</li>
+                            <li>@Html.ActionLink("Renovations", "Services", "Services")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="widget">
+                        <h5 class="widgetheading">Legal</h5>
+                        <ul class="link-list">
+                            <li>@Html.ActionLink("Terms & Conditions", "TC", "TCPP")</li>
+                            <li>@Html.ActionLink("Privacy Policy", "PP", "TCPP")</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        <div class="copyright">
+                            <p><span>&copy; Quad Systems. All right reserved</span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <a href="#" class="scrollup"><i class="icon-angle-up icon-rounded icon-bglight icon-2x"></i></a>
+
+    <!-- javascript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Content/ourTemplate/js/jquery.js"></script>
+    <script src="~/Content/ourTemplate/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/ourTemplate/js/bootstrap.js"></script>
+    <script src="~/Content/ourTemplate/js/modernizr.custom.js"></script>
+    <script src="~/Content/ourTemplate/js/toucheffects.js"></script>
+    <script src="~/Content/ourTemplate/js/google-code-prettify/prettify.js"></script>
+    <script src="~/Content/ourTemplate/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/ourTemplate/js/portfolio/jquery.quicksand.js"></script>
+    <script src="~/Content/ourTemplate/js/portfolio/setting.js"></script>
+    <script src="~/Content/ourTemplate/js/animate.js"></script>
+
+    <!-- Template Custom JavaScript File -->
+    <script src="~/Content/ourTemplate/js/custom.js"></script>
+    <script type="text/javascript">
+        $(".selectFilter").on("change", function () { var e = $(this).data("target"), i = $(this).find(":selected").data("ref"); $("select." + e).val("-1"), null == i ? $("select." + e).find("option").each(function () { console.log("inside undefined"), $(this).removeAttr("disabled hidden") }) : $("select." + e).find("option").each(function () { var e = $(this).data("belong"), t = $(this).val(); i != e && -1 != t ? ($(this).prop("disabled", !0), $(this).prop("hidden", !0)) : ($(this).prop("disabled", !1), $(this).prop("hidden", !1)) }) });
+    </script>
+
+</body>
+</html>

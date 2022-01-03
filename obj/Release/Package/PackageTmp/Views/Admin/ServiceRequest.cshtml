@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "ServiceRequest";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <p style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 0px; border-color: black; border-style:solid;"></p>
+            <h1 class="mt-4">Service Requests</h1>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    A History of All Service Requests made by Account Holders.
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Date Made</th>
+                                <th>User ID</th>
+                                <th>Service Request</th>
+                                <th>Booking Details</th>
+                                <th>Scoped</th>
+                                <th>Progress</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Date Made</th>
+                                <th>User ID</th>
+                                <th>Service Request</th>
+                                <th>Booking Details</th>
+                                <th>Scoped</th>
+                                <th>In-Progress</th>
+                                <th>Done</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{
+                                if (Model != null)
+                                {
+                                    foreach (var Data in Model)
+                                    {
+                                        <tr>
+                                            <td>@Data.booking_id</td>
+                                            <td>@Data.date_made</td>
+                                            <td>@Data.user_id</td>
+                                            <td>@Data.service_request</td>
+                                            <td>@Data.booking_details</td>
+
+                                            <td>
+                                                @Data.scoped
+                                            </td>
+
+                                            <td>
+                                                @Data.progress
+                                            </td>
+
+                                            <td>
+                                                @Data.done
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <hr style="height: 4px; background-color: #0d6efd ">
+            <div style="float:left;">
+                <div class="span6">
+                    <form action="UpdtSRqst" method="post">
+                        <h3 class="text-center">Update Progress on Service Requests</h3>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="booking_id">Booking ID</label>
+                            <br>
+                            <input size="15" type="tel" name="booking_id" id="booking_id" placeholder="Enter Booking ID" class="form-control" required>
+                        </div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="scoped">Scoped</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <select id="scoped" name="scoped" align="center" required>
+                                            <option value="">Status</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td style="width:70%">
+                                    <div class="form-group">
+                                        <label for="progress">Progress</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <select id="progress" name="progress" required>
+                                            <option value="">Status</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr><td><br /></td></tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="done">Done</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <select id="done" name="done" required>
+                                            <option value="">Status</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-info" type="submit" id="submitBtn">Update </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <script>
+                // Restricts input for the given textbox to the given inputFilter.
+                function setInputFilter(textbox, inputFilter) {
+                    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+                        textbox.addEventListener(event, function () {
+                            if (inputFilter(this.value)) {
+                                this.oldValue = this.value;
+                                this.oldSelectionStart = this.selectionStart;
+                                this.oldSelectionEnd = this.selectionEnd;
+                            } else if (this.hasOwnProperty("oldValue")) {
+                                this.value = this.oldValue;
+                                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                            } else {
+                                this.value = "";
+                            }
+                        });
+                    });
+                }
+                // Install input filters.
+                setInputFilter(document.getElementById("booking_id"), function (value) {
+                    return /^\d*$/.test(value);
+                });
+            </script>
+        </div>
+    </main>
+</div>
+<script>
+    //document.getElementById('colorChanger').addEventListener('change', changeColor);
+    //function changeColor() {
+    //  if (document.getElementById('y').value = "Yes") {
+    //        document.getElementById('y').style.color = "blue";
+    ////    }
+    //    else {
+    //        document.getElementById('y').style.color = "red";
+    //    }
+    //    var color = document.getElementById('ScopeColor').style.color;
+    //    document.getElementById("txtID").style.color = color;
+    //}
+
+    //function changeColor(this) {
+    //    if (this.value == 'Yes') {
+    //        this.style.color = "blue";
+    //    }
+    //    //console.log(this.value);
+    //}
+</script>
