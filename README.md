@@ -9,6 +9,6 @@ A Service Request/Booking system that allows registered users to book a service 
 Administration Dashboard to manage registered users, enquiries made, and service requests/bookings. We developed all the website pages and designed a fully functional Database.
 Technologies used:
 
-Frontend (HTML5, CSS, & JavaScript)
-Microsoft SQL Server Management Studio (SQL_Server)
+Frontend (HTML5, CSS, & JavaScript),
+Microsoft SQL Server Management Studio (SQL_Server),
 Microsoft Visual Studio (C# & ASP.NET MVC)
