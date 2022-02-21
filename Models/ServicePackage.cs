@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Models
 {
     public class ServicePackage
     {
+
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+
+        // SQL configerations (User)
+        SqlConnection con;
+        SqlDataReader dr;
+        SqlCommand cmd;
+        public ServicePackage()
+        {
+            con = new SqlConnection(connectionString);
+        }
         public int NumberServiceOffering()
         {
             int numofRows;
             string numRs = "";
 
-            SqlConnection conq = new SqlConnection();
-            SqlDataReader drNR;
-            void connectionStringAdmin()
-            {
-                //conq.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                conq.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-            conq.Open();
-            SqlCommand cmdNumR = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering';", conq);
+            con.Open();
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering';", con);
 
-            using (drNR = cmdNumR.ExecuteReader())
+            using (dr = cmd.ExecuteReader())
             {
-                while (drNR.Read())
+                while (dr.Read())
                 {
-                    numRs = drNR[0].ToString();
+                    numRs = dr[0].ToString();
                 }
             }
 
-
             numofRows = Convert.ToInt32(numRs);
-            conq.Close();
+            con.Close();
             return numofRows;
         }
         public double NumberofPlbmg(int gv)
@@ -42,17 +45,8 @@ namespace BlaidonWebApplication.Models
             double num;
             string numS = "";
 
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Plumbing'; ", con);
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Plumbing'; ", con);
             using (dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
@@ -68,20 +62,11 @@ namespace BlaidonWebApplication.Models
             double numRound = Math.Round(math, 2);
             con.Close();
             return numRound;
-            }
+        }
         public double NumberofPtng(int gv)
         {
             double num;
             string numS = "";
-
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
 
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Painting'; ", con);
@@ -106,17 +91,8 @@ namespace BlaidonWebApplication.Models
             double num;
             string numS = "";
 
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Electrical'; ", con);
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Electrical'; ", con);
             using (dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
@@ -138,17 +114,8 @@ namespace BlaidonWebApplication.Models
             double num;
             string numS = "";
 
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Flooring';", con);
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Flooring';", con);
             using (dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
@@ -170,17 +137,8 @@ namespace BlaidonWebApplication.Models
             double num;
             string numS = "";
 
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Dry Walling';", con);
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Dry Walling';", con);
             using (dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
@@ -202,17 +160,8 @@ namespace BlaidonWebApplication.Models
             double num;
             string numS = "";
 
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Building';", con);
+            cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Building';", con);
             using (dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
@@ -233,15 +182,6 @@ namespace BlaidonWebApplication.Models
         {
             double num;
             string numS = "";
-
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
 
             con.Open();
             SqlCommand cmd = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries WHERE Category = 'Service Offering' AND Type = 'Renovation';", con);

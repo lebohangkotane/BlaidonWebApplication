@@ -6,13 +6,27 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using BlaidonWebApplication.Models;
 using System.Data;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Controllers
 {
     public class AccountController : Controller
     {
         List<Booking> bookings = new List<Booking>();
+
+        //sql connection
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
         SqlDataReader dr;
+        SqlCommand cmd;
+        SqlConnection con;
+
+
+        public AccountController() 
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+        }
+        
+
         // GET: Account
         public ActionResult Users()
         {
@@ -21,8 +35,6 @@ namespace BlaidonWebApplication.Controllers
             {
                 bookings.Clear();
             }
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             //Reading Booking details From our database
             var ui = (string)Session["UserID"];
@@ -61,9 +73,6 @@ namespace BlaidonWebApplication.Controllers
         {
             try
             {
-                //sql connection
-                SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
                 //insert Booking details into our database
                 var ui = (string)Session["UserID"];
                 bk.user_id = ui;
@@ -110,18 +119,7 @@ namespace BlaidonWebApplication.Controllers
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = System.Text.Encoding.ASCII.GetString(data);
 
-            // SQL configerations (User)
-            SqlConnection con = new SqlConnection();
-            SqlCommand com = new SqlCommand();
-            SqlDataReader dr;
-            void connectionString()
-            {
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI; ";
-            }
-
             //using sql connection check to see if user is in our databse
-            connectionString();
             con.Open();
 
             //Query declares
@@ -131,13 +129,13 @@ namespace BlaidonWebApplication.Controllers
             string dltQueryBookingTbl = "Delete from tblBookings where User_ID=@username";
 
             //checking login credentials
-            using (com = new SqlCommand(sqlQuery, con))
+            using (cmd = new SqlCommand(sqlQuery, con))
             {
-                var username = com.Parameters.Add("@username", SqlDbType.NVarChar);
-                var password = com.Parameters.Add("@hash", SqlDbType.NVarChar);
+                var username = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
+                var password = cmd.Parameters.Add("@hash", SqlDbType.NVarChar);
                 username.Value = acc.UserName;
                 password.Value = hash;
-                dr = com.ExecuteReader();
+                dr = cmd.ExecuteReader();
             }
 
             //user exists proceeding to delete account
@@ -146,31 +144,31 @@ namespace BlaidonWebApplication.Controllers
                 //Delete User table
                 con.Close();
                 con.Open();
-                using (com = new SqlCommand(dltQueryUserTbl, con))
+                using (cmd = new SqlCommand(dltQueryUserTbl, con))
                 {
-                    var username = com.Parameters.Add("@username", SqlDbType.NVarChar);
+                    var username = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
                     username.Value = acc.UserName;
-                    dr = com.ExecuteReader();
+                    dr = cmd.ExecuteReader();
                 }
 
                 //Delete Booking table
                 con.Close();
                 con.Open();
-                using (com = new SqlCommand(dltQueryBookingTbl, con))
+                using (cmd = new SqlCommand(dltQueryBookingTbl, con))
                 {
-                    var username = com.Parameters.Add("@username", SqlDbType.NVarChar);
+                    var username = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
                     username.Value = acc.UserName;
-                    dr = com.ExecuteReader();
+                    dr = cmd.ExecuteReader();
                 }
 
                 //Delete Login table
                 con.Close();
                 con.Open();
-                using (com = new SqlCommand(dltQueryLoginTbl, con))
+                using (cmd = new SqlCommand(dltQueryLoginTbl, con))
                 {
-                    var username = com.Parameters.Add("@username", SqlDbType.NVarChar);
+                    var username = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
                     username.Value = acc.UserName;
-                    dr = com.ExecuteReader();
+                    dr = cmd.ExecuteReader();
                 }
 
                 Response.Write("<script>alert('Your Account has been Successfully Deleted. Bye.');</script>");

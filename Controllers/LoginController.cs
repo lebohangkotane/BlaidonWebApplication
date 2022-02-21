@@ -8,47 +8,41 @@ using System.Data.SqlClient;
 using System.Data;
 using Recaptcha.Web.Mvc;
 using Recaptcha.Web;
+using System.Configuration;
 
 
 namespace BlaidonWebApplication.Controllers
 {
     public class LoginController : Controller
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+
+        //public variables--
+        public class Global
+        {
+            public static string uiAStrg;
+        }
+
+        // SQL configerations (User)
+        SqlConnection con;
+        SqlDataReader dr;
+        SqlCommand cmd;
+
+        // SQL configerations (Admin)
+        SqlConnection conA;
+        SqlCommand cmdA = new SqlCommand();
+        SqlDataReader drA;
+        public LoginController()
+        {
+             con = new SqlConnection(connectionString);
+             conA = new SqlConnection(connectionString);
+        }
+
+
         // GET: Login
         public ActionResult Login()
         {
             return View();
-        }
-
-
-        //public variables--
-        public class Global 
-        {
-            public static string uiAStrg; 
-        }
-
-        // SQL configerations (User)
-        SqlConnection con = new SqlConnection();
-        SqlCommand com = new SqlCommand();
-        SqlDataReader dr;
-
-        // SQL configerations (Admin)
-        SqlConnection conA = new SqlConnection();
-        SqlCommand comA = new SqlCommand();
-        SqlDataReader drA; 
-
-        //sql connection 
-        void connectionString()
-        {
-            
-            con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //con.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI; ";
-        }
-        void connectionStringAdmin()
-        {
-
-            conA.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //conA.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
         }
 
         [HttpPost]
@@ -62,17 +56,16 @@ namespace BlaidonWebApplication.Controllers
 
 
             //using sql connection check to see if user is in our databse
-            connectionStringAdmin();
             conA.Open();
 
             string sql = "select * from tblAdministration where Email=@username and password=@hash;";
-            using (comA = new SqlCommand(sql, conA))
+            using (cmdA = new SqlCommand(sql, conA))
             {
-                var username = comA.Parameters.Add("@username", SqlDbType.NVarChar);
-                var password = comA.Parameters.Add("@hash", SqlDbType.NVarChar);
+                var username = cmdA.Parameters.Add("@username", SqlDbType.NVarChar);
+                var password = cmdA.Parameters.Add("@hash", SqlDbType.NVarChar);
                 username.Value = acc.UserName;
                 password.Value = hash;
-                drA = comA.ExecuteReader();
+                drA = cmdA.ExecuteReader();
             }
 
             if (drA.Read())
@@ -90,17 +83,16 @@ namespace BlaidonWebApplication.Controllers
             {
                 conA.Close();
                 //using sql connection check to see if user is in our databse
-                connectionString();
                 con.Open();
 
                 string sqlQuery = "select * from tblLoginCredentials where username=@username and password=@hash;";
-                using (com = new SqlCommand(sqlQuery, con))
+                using (cmd = new SqlCommand(sqlQuery, con))
                 {
-                    var username = com.Parameters.Add("@username", SqlDbType.NVarChar);
-                    var password = com.Parameters.Add("@hash", SqlDbType.NVarChar);
+                    var username = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
+                    var password = cmd.Parameters.Add("@hash", SqlDbType.NVarChar);
                     username.Value = acc.UserName;
                     password.Value = hash;
-                    dr = com.ExecuteReader();
+                    dr = cmd.ExecuteReader();
                 }
                 if (dr.Read())
                 {

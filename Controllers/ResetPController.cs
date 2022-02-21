@@ -8,11 +8,23 @@ using System.Data;
 using System.Net.Mail;
 using System.Net;
 using System.Data.SqlClient;
+using System.Configuration;
+
 
 namespace BlaidonWebApplication.Controllers
 {
     public class ResetPController : Controller
     {
+        //SQL Connections
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+        SqlDataReader dr;
+        SqlCommand cmd;
+        SqlConnection con;
+        public ResetPController()
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+        }
+
         // GET: ResetP
         public ActionResult ForgotPassword()
         {
@@ -29,22 +41,13 @@ namespace BlaidonWebApplication.Controllers
         {
             string uemail = er.EmailAdd.ToString();
 
-            // SQL Configurations
-            SqlCommand com = new SqlCommand();
-            SqlConnection con = new SqlConnection();
-            SqlDataReader dr;
-            void connectionStringAdmin()
-            {
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-            connectionStringAdmin();
             con.Open();
             string sql = "select * from tblLoginCredentials where Username=@email;";
-            using (com = new SqlCommand(sql, con))
+            using (cmd = new SqlCommand(sql, con))
             {
-                var email = com.Parameters.Add("@email", SqlDbType.NVarChar);
+                var email = cmd.Parameters.Add("@email", SqlDbType.NVarChar);
                 email.Value = er.EmailAdd;
-                dr = com.ExecuteReader();
+                dr = cmd.ExecuteReader();
             }
 
             if (dr.Read())

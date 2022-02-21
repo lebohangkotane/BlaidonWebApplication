@@ -4,11 +4,22 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Models
 {
     public class Reset
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+
+        // SQL configerations (User)
+        SqlConnection con;
+        SqlDataReader dr;
+        SqlCommand cmd;
+        public Reset()
+        {
+            con = new SqlConnection(connectionString);
+        }
         public string EmailAdd { get; set; }
         public string OTP { get; set; }
         public string password { get; set; }
@@ -23,26 +34,15 @@ namespace BlaidonWebApplication.Models
             String hash = System.Text.Encoding.ASCII.GetString(data);
 
             //insert user details to Login Credentials 
-
-
-            // SQL Configurations
-            SqlCommand com = new SqlCommand();
-            SqlConnection con = new SqlConnection();
-            void connectionStringAdmin()
-            {
-                con.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            }
-
             string sql = "Update tblLoginCredentials set Password=@pswd where Username=@email;";
-            using (com = new SqlCommand(sql, con))
+            using (cmd = new SqlCommand(sql, con))
             {
-                var email = com.Parameters.Add("@email", SqlDbType.NVarChar);
-                var pswd = com.Parameters.Add("@pswd", SqlDbType.NVarChar);
+                var email = cmd.Parameters.Add("@email", SqlDbType.NVarChar);
+                var pswd = cmd.Parameters.Add("@pswd", SqlDbType.NVarChar);
                 email.Value = u;
                 pswd.Value = hash;
-                connectionStringAdmin();
                 con.Open();
-                com.ExecuteReader();
+                cmd.ExecuteReader();
                 con.Close();
             }
         }

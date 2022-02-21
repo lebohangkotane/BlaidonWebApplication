@@ -7,11 +7,21 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using BlaidonWebApplication.Models;
 using System.Data;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Controllers
 {
     public class AdminController : Controller
     {
+        //sql connection
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+        SqlDataReader dr;
+        SqlCommand cmd;
+        SqlConnection con;
+        public AdminController()
+        {
+            con = new SqlConnection(connectionString);
+        }
         public class Myvariables
         {
             public static int x = 0;
@@ -23,7 +33,8 @@ namespace BlaidonWebApplication.Controllers
         List<Enquiry> enquiries = new List<Enquiry>();
         List<Registration> users = new List<Registration>();
         List<AdminClss> adminL = new List<AdminClss>();
-        SqlDataReader dr;
+        
+        
         // GET: Admin
         public ActionResult Dashboard()
         {
@@ -84,14 +95,10 @@ namespace BlaidonWebApplication.Controllers
             if (bookings.Count > 0)
             {
                 bookings.Clear();
-            }
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //SqlConnection con = new SqlConnection("data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;");
-
+            }           
 
             //Reading Booking details From our database
-            SqlCommand cmd = new SqlCommand("Select * from tblBookings ORDER BY Booking_ID DESC; ", con);
+            cmd = new SqlCommand("Select * from tblBookings ORDER BY Booking_ID DESC;", con);
 
             con.Open();
             dr = cmd.ExecuteReader();
@@ -127,13 +134,9 @@ namespace BlaidonWebApplication.Controllers
             {
                 enquiries.Clear();
             }
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //SqlConnection con = new SqlConnection("data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;");
-
-
+            
             //insert Booking details into our database
-            SqlCommand cmd = new SqlCommand("Select * from tblEnquiries ORDER BY Enquiry_ID DESC; ", con);
+            cmd = new SqlCommand("Select * from tblEnquiries ORDER BY Enquiry_ID DESC; ", con);
 
             con.Open();
             dr = cmd.ExecuteReader();
@@ -165,13 +168,9 @@ namespace BlaidonWebApplication.Controllers
             {
                 users.Clear();
             }
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //SqlConnection con = new SqlConnection("data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;");
-
-
+          
             //insert Booking details into our database
-            SqlCommand cmd = new SqlCommand("Select * from tblUsers ORDER BY User_ID DESC; ", con);
+            cmd = new SqlCommand("Select * from tblUsers ORDER BY User_ID DESC; ", con);
 
             con.Open();
             dr = cmd.ExecuteReader();
@@ -203,11 +202,9 @@ namespace BlaidonWebApplication.Controllers
             {
                 adminL.Clear();
             }
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
+            
             //insert Booking details into our database
-            SqlCommand cmd = new SqlCommand("Select * from tblAdministration ORDER BY Admin_ID DESC; ", con);
+            cmd = new SqlCommand("Select * from tblAdministration ORDER BY Admin_ID DESC; ", con);
 
             con.Open();
             dr = cmd.ExecuteReader();
@@ -244,11 +241,9 @@ namespace BlaidonWebApplication.Controllers
 
             try
             {
-                //sql connection
-                SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
+                
                 //insert Enquiry to our database
-                SqlCommand cmd = new SqlCommand(@"INSERT INTO[dbo].[tbladministration]
+                cmd = new SqlCommand(@"INSERT INTO[dbo].[tbladministration]
                 ([F_Name], 
                 [L_Name],
                 [Phone_No],
@@ -275,10 +270,8 @@ namespace BlaidonWebApplication.Controllers
 
         public ActionResult DlteAdmin(AdminClss adm)
         {
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             //Delete Enquiry to our database
-            SqlCommand cmd = new SqlCommand("DELETE FROM tblAdministration WHERE Admin_ID= " + adm.Admin_ID, con);
+            cmd = new SqlCommand("DELETE FROM tblAdministration WHERE Admin_ID= " + adm.Admin_ID, con);
             SqlCommand cmdr = new SqlCommand("Select * From tblAdministration WHERE Admin_ID= " + adm.Admin_ID, con);
 
             try
@@ -327,10 +320,9 @@ namespace BlaidonWebApplication.Controllers
 
         public ActionResult DlteUsrs(Account acnt)
         {
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            
             //Delete Enquiry to our database
-            SqlCommand cmd = new SqlCommand("DELETE FROM tblUsers WHERE User_ID= " + acnt.User_Identity, con);
+            cmd = new SqlCommand("DELETE FROM tblUsers WHERE User_ID= " + acnt.User_Identity, con);
             SqlCommand cmdr = new SqlCommand("Select * From tblUsers WHERE User_ID= " + acnt.User_Identity, con);
 
             try
@@ -369,10 +361,8 @@ namespace BlaidonWebApplication.Controllers
 
         public ActionResult DlteEqrs(Enquiry eqrs)
         {
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             //Delete Enquiry to our database
-            SqlCommand cmd = new SqlCommand("DELETE FROM tblEnquiries WHERE Enquiry_ID= " + eqrs.Enquiry_ID, con);
+            cmd = new SqlCommand("DELETE FROM tblEnquiries WHERE Enquiry_ID= " + eqrs.Enquiry_ID, con);
             SqlCommand cmdr = new SqlCommand("Select * From tblEnquiries WHERE Enquiry_ID= " + eqrs.Enquiry_ID, con);
 
             try
@@ -417,114 +407,82 @@ namespace BlaidonWebApplication.Controllers
             int numofRowsE;
             string numRsE = "";
 
-            SqlConnection conE = new SqlConnection();
-            SqlDataReader drNRE;
-            void connectionStringAdmin()
-            {
-                conE.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //conE.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-        }
-            connectionStringAdmin();
-            conE.Open();
-            SqlCommand cmdNumR = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries; ", conE);
+            con.Open();
+            SqlCommand cmdNumR = new SqlCommand("SELECT COUNT(type) FROM tblEnquiries; ", con);
 
-            using (drNRE = cmdNumR.ExecuteReader())
+            using (dr = cmdNumR.ExecuteReader())
             {
-                while (drNRE.Read())
+                while (dr.Read())
                 {
-                    numRsE = drNRE[0].ToString();
+                    numRsE = dr[0].ToString();
                 }
             }
 
             numofRowsE = Convert.ToInt32(numRsE);
-            conE.Close();
+            con.Close();
             return numofRowsE;
         }
         public int NumberofServiceR()
         {
-            //number of Enquiries
+            //number of ServiceRequests
             int numofRowsSR;
             string numRSR = "";
 
-            SqlConnection conSR = new SqlConnection();
-            SqlDataReader drNRSR;
-            void connectionStringAdmin()
-            {
-                conSR.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //conSR.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-        }
-            connectionStringAdmin();
-            conSR.Open();
-            SqlCommand cmdNumR = new SqlCommand("SELECT COUNT(Booking_ID) FROM tblBookings; ", conSR);
+            con.Open();
+            SqlCommand cmdNumR = new SqlCommand("SELECT COUNT(Booking_ID) FROM tblBookings; ", con);
 
-            using (drNRSR = cmdNumR.ExecuteReader())
+            using (dr = cmdNumR.ExecuteReader())
             {
-                while (drNRSR.Read())
+                while (dr.Read())
                 {
-                    numRSR = drNRSR[0].ToString();
+                    numRSR = dr[0].ToString();
                 }
             }
 
             numofRowsSR = Convert.ToInt32(numRSR);
-            conSR.Close();
+            con.Close();
             return numofRowsSR;
         }
         public int NumberofUsers()
         {
-            //number of Enquiries
+            //number of Users
             int numofRowsU;
             string numRSU = "";
 
-            SqlConnection conU = new SqlConnection();
-            SqlDataReader drNRU;
-            void connectionStringAdmin()
-            {
-                conU.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //conU.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-        }
-            connectionStringAdmin();
-            conU.Open();
-            SqlCommand cmdNumRU = new SqlCommand("SELECT COUNT(User_ID) FROM tblUsers; ", conU);
+            con.Open();
+            SqlCommand cmdNumRU = new SqlCommand("SELECT COUNT(User_ID) FROM tblUsers; ", con);
 
-            using (drNRU = cmdNumRU.ExecuteReader())
+            using (dr = cmdNumRU.ExecuteReader())
             {
-                while (drNRU.Read())
+                while (dr.Read())
                 {
-                    numRSU = drNRU[0].ToString();
+                    numRSU = dr[0].ToString();
                 }
             }
 
             numofRowsU = Convert.ToInt32(numRSU);
-            conU.Close();
+            con.Close();
             return numofRowsU;
         }
         public int NumberofAdmins()
         {
-            //number of Enquiries
+            //number of Admins
             int numofRowsA;
             string numRSA = "";
 
-            SqlConnection conA = new SqlConnection();
-            SqlDataReader drNRA;
-            void connectionStringAdmin()
-            {
-                conA.ConnectionString = "Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //conA.ConnectionString = "data source = VANSTHEMACHINE; database = Blaidon; integrated security = SSPI;";
-        }
-            connectionStringAdmin();
-            conA.Open();
-            SqlCommand cmdNumRU = new SqlCommand("SELECT COUNT(Admin_ID) FROM tbladministration; ", conA);
+            con.Open();
+            cmd = new SqlCommand("SELECT COUNT(Admin_ID) FROM tbladministration; ", con);
 
-            using (drNRA = cmdNumRU.ExecuteReader())
+            using (dr = cmd.ExecuteReader())
             {
-                while (drNRA.Read())
+                while (dr.Read())
                 {
-                    numRSA = drNRA[0].ToString();
+                    numRSA = dr[0].ToString();
                 }
             }
 
             numofRowsA = Convert.ToInt32(numRSA);
-            conA.Close();
+            con.Close();
             return numofRowsA;
         }
 
@@ -540,10 +498,7 @@ namespace BlaidonWebApplication.Controllers
             string progress = bRqst.progress;
             string done = bRqst.done;
             int id = int.Parse(bRqst.booking_id);
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            SqlCommand com;
-            SqlDataReader dr;
+            
             try
             {
                 SqlDataReader drS;
@@ -563,19 +518,19 @@ namespace BlaidonWebApplication.Controllers
                     con.Open();
                     //Update Enquiry to our database
                     string sqlQuery = "update tblBookings set Scoped=@sc, Progress=@pro,Done=@do where Booking_ID=@bokid";
-                    using (com = new SqlCommand(sqlQuery, con))
+                    using (cmd = new SqlCommand(sqlQuery, con))
                     {
-                        var s = com.Parameters.Add("@sc", SqlDbType.NVarChar);
-                        var p = com.Parameters.Add("@pro", SqlDbType.NVarChar);
-                        var d = com.Parameters.Add("@do", SqlDbType.NVarChar);
-                        var bid = com.Parameters.Add("@bokid", SqlDbType.Int);
+                        var s = cmd.Parameters.Add("@sc", SqlDbType.NVarChar);
+                        var p = cmd.Parameters.Add("@pro", SqlDbType.NVarChar);
+                        var d = cmd.Parameters.Add("@do", SqlDbType.NVarChar);
+                        var bid = cmd.Parameters.Add("@bokid", SqlDbType.Int);
 
                         s.Value = scoped;
                         p.Value = progress;
                         d.Value = done;
                         bid.Value = id;
 
-                        dr = com.ExecuteReader();
+                        dr = cmd.ExecuteReader();
                     }
 
                     Response.Write("<script>alert('Tracking Successfully Updated.');</script>");

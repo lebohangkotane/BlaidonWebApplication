@@ -10,12 +10,23 @@ using System.Net;
 using Recaptcha.Web.Mvc;
 using Recaptcha.Web;
 using System.Data;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Controllers
 {
     public class RegistrationController : Controller
     {
         public SmtpDeliveryMethod DeliveryMethod { get; private set; }
+
+        //SQL Connections
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+        SqlDataReader dr;
+        SqlCommand cmd;
+        SqlConnection con;
+        public RegistrationController()
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+        }
 
         // GET: Registration
         public ActionResult Register()
@@ -33,11 +44,9 @@ namespace BlaidonWebApplication.Controllers
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = System.Text.Encoding.ASCII.GetString(data);
 
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
             string query = "INSERT INTO tblLoginCredentials(Username, password) VALUES(@username,@password)";
-       
-            SqlCommand cmd = new SqlCommand(query, con);
+            cmd = new SqlCommand(query, con);
 
             //pass values to parameters
             var usr = cmd.Parameters.Add("@username", SqlDbType.NVarChar);
@@ -71,20 +80,18 @@ namespace BlaidonWebApplication.Controllers
             else
             {
                 // sql connection
-                SqlConnection conCheck = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-                SqlDataReader drSCheck;
                 string query = "Select * From tblUsers WHERE username=@email";
-                SqlCommand cmdCheckr = new SqlCommand(query, conCheck);
+                cmd = new SqlCommand(query, con);
                 //pass values to parameters
-                var e = cmdCheckr.Parameters.Add("@email", SqlDbType.NVarChar);
+                var e = cmd.Parameters.Add("@email", SqlDbType.NVarChar);
                 e.Value = reg.Email_add;
-                conCheck.Open();
-                drSCheck = cmdCheckr.ExecuteReader();
+                con.Open();
+                dr = cmd.ExecuteReader();
                 
-                if (drSCheck.HasRows)
+                if (dr.HasRows)
                 {
                     Response.Write("<script>alert('Email taken. Account already registered.');</script>");
-                    conCheck.Close();
+                    con.Close();
                     Register();
                     return View("Register");
                 }
@@ -139,9 +146,6 @@ namespace BlaidonWebApplication.Controllers
         {
             if (Session["emailOTP"].ToString() == r.OTP)
             {
-                //sql connection
-                SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
                 //adding sessions into varibles
                 string eml = Session["Email"].ToString();
                 string fn = Session["FName"].ToString();
@@ -150,7 +154,7 @@ namespace BlaidonWebApplication.Controllers
 
                 //Register user into our database(User Table)
                 string query = "INSERT INTO tblUsers(Username, FName, LName, Phone_No) VALUES(@e,@f,@l,@p)";
-                SqlCommand cmd = new SqlCommand(query, con);
+                cmd = new SqlCommand(query, con);
 
                 //pass values to parameters
                 var email = cmd.Parameters.Add("@e", SqlDbType.NVarChar);

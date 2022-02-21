@@ -4,11 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace BlaidonWebApplication.Models
 {
     public class Enquiry
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["BlaidonConnection"].ConnectionString;
+
+        // SQL configerations (User)
+        SqlConnection con;
+        SqlDataReader dr;
+        SqlCommand cmd;
+
+        public Enquiry()
+        {
+            con = new SqlConnection(connectionString);
+        }
         public string Enquiry_ID { get; set; }
         public string Email { get; set; }
         public string category { get; set; }
@@ -19,9 +31,6 @@ namespace BlaidonWebApplication.Models
         //Method: Sending Enquiries to database
         public void ToEnquiryTbl(Enquiry eqry)
         {
-            //sql connection
-            SqlConnection con = new SqlConnection("Server = tcp:blaidon.database.windows.net,1433; Initial Catalog = Blaidon; Persist Security Info = False; User ID = Blaidon; Password =#ViwemeAdmin123.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
             //insert Enquiry to our database
             string query = "INSERT INTO tblEnquiries(Email, Category, Type, Message_Enquiry) VALUES(@e,@c,@t,@m)";
             SqlCommand cmd = new SqlCommand(query, con);
